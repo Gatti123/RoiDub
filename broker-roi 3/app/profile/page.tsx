@@ -43,7 +43,8 @@ export default function ProfilePage() {
     e.preventDefault();
     if (!uid) return;
     setError(""); setStatus("");
-    const { error: err } = await supabaseBrowser().from("profiles").upsert({ id: uid, ...p });
+    const { full_name, agency, brn, phone, whatsapp, email, logo_url } = p; // telegram_id is set by the server only
+    const { error: err } = await supabaseBrowser().from("profiles").upsert({ id: uid, full_name, agency, brn, phone, whatsapp, email, logo_url });
     if (err) return setError(err.message);
     setStatus(t("saved"));
   };
